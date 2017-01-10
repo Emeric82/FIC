@@ -39,6 +39,8 @@
 #define gV_MAX 227
 
 #define RAZA 200
+
+
 using namespace std;
 using namespace cv;
 //initial min and max HSV filter values.
@@ -119,12 +121,12 @@ void createTrackbars() {
     sprintf(TrackbarName, "V_MIN", V_MIN);
     sprintf(TrackbarName, "V_MAX", V_MAX);
  */
-	 sprintf(TrackbarName, "H_MIN");
+	 /*sprintf(TrackbarName, "H_MIN");
     sprintf(TrackbarName, "H_MAX");
     sprintf(TrackbarName, "S_MIN");
     sprintf(TrackbarName, "S_MAX");
     sprintf(TrackbarName, "V_MIN");
-    sprintf(TrackbarName, "V_MAX");
+    sprintf(TrackbarName, "V_MAX");*/
     //create trackbars and insert them into window
     //3 parameters are: the address of the variable that is changing when the trackbar is moved(eg.H_LOW),
     //the max value the trackbar can move (eg. H_HIGH),
@@ -364,16 +366,17 @@ int main(int argc, char* argv[])
     
     while (1) {
 
-
+
 	 //n = write(sockfd,buffer,strlen(buffer));
    	 //store image to matrix
-   	 capture.read(cameraFeed);
-   	 //convert frame from BGR to HSV colorspace
-   	 cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
-	if(cameraFeed.empty())
+   	 capture.read(cameraFeed);
+         if(cameraFeed.empty())
 	{
 		return 1;
 	}
+   	 //convert frame from BGR to HSV colorspace
+   	 cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
+	
    	 //filter HSV image between values and store filtered image to
    	 //threshold matrix
    
@@ -395,7 +398,7 @@ int main(int argc, char* argv[])
   	x1=x;
   	y1=y;
 	}
-   */
+	
       inRange(HSV, Scalar(rH_MIN, rS_MIN, rV_MIN), Scalar(rH_MAX, rS_MAX, rV_MAX), threshold);
    	 //perform morphological operations on thresholded image to eliminate noise
    	 //and emphasize the filtered object(s)
